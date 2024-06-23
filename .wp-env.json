@@ -1,0 +1,9 @@
+{
+	"plugins": [ "." ],
+	"themes": [],
+	"core": null,
+	"config": {
+		"WP_DEBUG": true,
+		"SCRIPT_DEBUG": true
+	}
+}

@@ -1,0 +1,60 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-create-block-content-expandable-block {
+	color: #fff;
+	padding: 2px;
+}
+
+.content-expandable-block {
+    display: flex;
+	width: 100%;
+    //background-color: #ffffff;
+}
+
+.news-button-container {
+	//float: left;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: top;
+	//background-color: #f2f2f2;
+	padding: 10px;
+	//box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+}
+
+.news-button-container button {
+	//width: 40px;
+	//height: 40px;
+	margin: 5px 0;
+	//font-size: 24px;
+	cursor: pointer;
+	border: 1px solid #202020;
+	border-radius: 8px;
+	//background-color: #ffffff;
+	//background-color: #5f5f5f;
+	transition: background-color 0.3s;
+	//color: #000000
+	//color: #f8f8f8
+	--default-background-color: #cccccc;
+}
+
+.news-button-container button.nb-enabled:hover {
+	background-color: var(--buttons-hover-background-color) !important;
+}
+
+.news-text-container {
+	//float: left;
+    //width: 50%;
+	flex-grow: 1;
+	padding: 20px;
+	display: flex;
+	align-items: left;
+	justify-content: left;
+	//background-color: #fafafa;
+}
