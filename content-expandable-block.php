@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name:       Content Expandable Block
- * Description:       Example block scaffolded with Create Block tool.
+ * Description:       WordPress Custom Block for expandable content
  * Requires at least: 6.1
  * Requires PHP:      7.0
  * Version:           0.1.0
- * Author:            The WordPress Contributors
- * License:           GPL-2.0-or-later
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Author:            Jaime Martín Soler
+ * License:           MIT License
+ * License URI:       https://github.com/JaimeMartinSoler/wordpress-content-expandable-block/blob/main/LICENSE
  * Text Domain:       content-expandable-block
  *
  * @package CreateBlock
