@@ -16,17 +16,30 @@ if (!function_exists('build_content')) {
         $styleButtons = "color: {$attributes['buttonsTextColor']};
             background-color: {$attributes['buttonsColor']};
             font-size: {$attributes['buttonsFontSize']};
-            width: {$attributes['buttonsSize']};
-            height: {$attributes['buttonsSize']};
+            width: {$attributes['buttonsWidth']};
+            height: {$attributes['buttonsHeight']};
+            margin: {$attributes['buttonsMargin']} 0;
+            border: {$attributes['buttonsBorderWidth']} solid {$attributes['buttonsBorderColor']};
+            border-radius: {$attributes['buttonsBorderRadius']};
+            --buttons-hover-text-color: {$attributes['buttonsTextHoverColor']};
             --buttons-hover-background-color: {$attributes['buttonsHoverColor']};";
 
-        $styleButtonsDisabled = "color: {$attributes['buttonsTextColor']};
-            background-color: {$attributes['buttonsDisableColor']};
+        $styleButtonsDisabled = "color: {$attributes['buttonsTextDisabledColor']};
+            background-color: {$attributes['buttonsDisabledColor']};
             font-size: {$attributes['buttonsFontSize']};
-            width: {$attributes['buttonsSize']};
-            height: {$attributes['buttonsSize']};";
+            width: {$attributes['buttonsWidth']};
+            height: {$attributes['buttonsHeight']};
+            margin: {$attributes['buttonsMargin']} 0;
+            border: {$attributes['buttonsBorderWidth']} solid {$attributes['buttonsBorderColor']};
+            border-radius: {$attributes['buttonsBorderRadius']};
+            --buttons-hover-text-color: {$attributes['buttonsTextHoverColor']};
+            --buttons-hover-background-color: {$attributes['buttonsHoverColor']};";
 
-        $styleButtonsContainer = "background-color: {$attributes['buttonsBackgroundColor']}";
+        $styleButtonsContainer = "background-color: {$attributes['buttonsBackgroundColor']};
+            padding: {$attributes['buttonsBackgroundPadding']};
+            border-radius: {$attributes['buttonsBackgroundRadius']};";
+
+        $styleText = "padding: {$attributes['textPadding']};";
 
         // extract json from $content
         $content = get_the_content();  // whole content including html tags
@@ -60,28 +73,21 @@ if (!function_exists('build_content')) {
         $nb_increase_enabled_display = count($content_json) <= 1? "none" : "block";
         $nb_increase_disabled_display = count($content_json) <= 1? "block" : "none";
         $class_news_text_container = get_block_wrapper_attributes(['class' => 'news-text-container']);
-        $CONTENT_EXPANDABLE_BLOCK = <<<HTML_BUTTONS_STR
+        $CONTENT_EXPANDABLE_BLOCK = <<<CONTENT_EXPANDABLE_BLOCK
             <div class="content-expandable-block">
                 <div class="news-button-container" news-post-id=$post_id style="$styleButtonsContainer">
-                    <button class="news-button nb-decrease nb-enabled" style="$styleButtons display: none;">-</button>
-                    <button class="news-button nb-decrease nb-disabled" style="$styleButtonsDisabled display: block;">-</button>
-                    <button class="news-button nb-increase nb-enabled" style="$styleButtons display: $nb_increase_enabled_display;">+</button>
-                    <button class="news-button nb-increase nb-disabled" style="$styleButtonsDisabled display: $nb_increase_disabled_display;">+</button>
+                    <button class="news-button nb-01 nb-enabled" style="$styleButtons display: none;">{$attributes['button01Text']}</button>
+                    <button class="news-button nb-01 nb-disabled" style="$styleButtonsDisabled display: block;">{$attributes['button01Text']}</button>
+                    <button class="news-button nb-02 nb-enabled" style="$styleButtons display: $nb_increase_enabled_display;">{$attributes['button02Text']}</button>
+                    <button class="news-button nb-02 nb-disabled" style="$styleButtonsDisabled display: $nb_increase_disabled_display;">{$attributes['button02Text']}</button>
                 </div>
-                <div $class_news_text_container news-post-id=$post_id>
+                <div $class_news_text_container news-post-id=$post_id style="$styleText">
                     $NEWS_TEXT
                 </div>
             </div>
-            HTML_BUTTONS_STR;
+            CONTENT_EXPANDABLE_BLOCK;
 
-        $TAG_WP_P_CONTENT = "WP_P_CONTENT";
-        $WP_P = "<p>$TAG_WP_P_CONTENT</p> <!-- wp:paragraph --> <p></p> <!-- /wp:paragraph -->";
-        //$WP_P = "<p>$TAG_WP_P_CONTENT</p>";
-
-        //$wp_p_replaced
-        $wp_p_replaced = str_replace($TAG_WP_P_CONTENT, $CONTENT_EXPANDABLE_BLOCK, $WP_P);
-        
-        return $wp_p_replaced;
+        return $CONTENT_EXPANDABLE_BLOCK;
     }
 }
 

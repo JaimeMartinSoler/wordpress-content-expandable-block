@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Deploys (moves) the build/ folder and content-expandable-block.php file from
+# the current path to the local wordpress plugin path
+
 SCRIPT_PATH="$(realpath "$0")"
 BLOCK_PATH="$(dirname "$SCRIPT_PATH")"
 WP_PLUGIN_BLOCK_PATH=/srv/www/wordpress/wp-content/plugins/content-expandable-block
@@ -21,8 +24,10 @@ fi
 
 echo "\nCleaning $WP_PLUGIN_BLOCK_PATH/*"
 rm -r $WP_PLUGIN_BLOCK_PATH/*
+
 echo "Copying $BLOCK_PATH/build to $WP_PLUGIN_BLOCK_PATH"
 cp -r $BLOCK_PATH/build $WP_PLUGIN_BLOCK_PATH
+
 echo "Copying $BLOCK_PATH/content-expandable-block.php to $WP_PLUGIN_BLOCK_PATH"
 cp $BLOCK_PATH/content-expandable-block.php $WP_PLUGIN_BLOCK_PATH
 
