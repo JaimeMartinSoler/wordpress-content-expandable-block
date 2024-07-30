@@ -5,7 +5,8 @@
 
 SCRIPT_PATH="$(realpath "$0")"
 BLOCK_PATH="$(dirname "$SCRIPT_PATH")"
-WP_PLUGIN_BLOCK_PATH=/srv/www/wordpress/wp-content/plugins/content-expandable-block
+#WP_PLUGIN_BLOCK_PATH=/srv/www/wordpress/wp-content/plugins/content-expandable-block
+WP_PLUGIN_BLOCK_PATH="/mnt/c/xampp/htdocs/wordpress-jai/wp-content/plugins/content-expandable-block"
 
 echo "\nRunning export.sh: to export the block code as wordpress plugin"
 echo "  - sh export.sh      : will NOT run 'npm run build'"
