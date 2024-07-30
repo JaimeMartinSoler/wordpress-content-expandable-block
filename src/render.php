@@ -43,7 +43,6 @@ if (!function_exists('build_content')) {
 
         // extract json from $content
         $content = get_the_content();  // whole content including html tags
-        $content_json = array("undefined");
         try {
             $content_json_str = extract_p_0($content); // string of the first <p></p> (that should be a json string) 
             // $content_json = {"short": "news length shorts...", "medium": "news length medium...", "large": "news length large..."}
@@ -101,7 +100,9 @@ if (!function_exists('extract_p_0')) {
         $dom = new DOMDocument();
 
         // Load the HTML content
-        @$dom->loadHTML($html_str); // Use @ to suppress errors due to malformed HTML
+        // UTF-8: https://stackoverflow.com/questions/8218230/php-domdocument-loadhtml-not-encoding-utf-8-correctly#answer-8218649
+        $contentType = '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
+        @$dom->loadHTML($contentType . $html_str); // Use @ to suppress errors due to malformed HTML
 
         // Get all <p> elements
         $paragraphs = $dom->getElementsByTagName('p');
@@ -109,7 +110,7 @@ if (!function_exists('extract_p_0')) {
         if ($paragraphs->length > 0) {
             // Get the text content of the first <p> element
             $extracted_text = $paragraphs->item(0)->textContent;
-            return $extracted_text; // Output: Text to extract
+            return $extracted_text;
         }
     }
 }
