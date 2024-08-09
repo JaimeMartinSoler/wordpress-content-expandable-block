@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { PanelBody, TextControl, __experimentalPaletteEdit as PaletteEdit, __experimentalBoxControl as BoxControl, FontSizePicker, BaseControl } from '@wordpress/components';
+import { PanelBody, TextControl, __experimentalPaletteEdit as PaletteEdit, __experimentalBoxControl as BoxControl, FontSizePicker, BaseControl, CheckboxControl } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 
 /**
@@ -28,6 +28,7 @@ import './editor.scss';
  * editor. This represents what the editor will render when the block is used.
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
+ * @see https://wordpress.github.io/gutenberg/?path=/docs/components-colorpalette--docs
  *
  * @return {Element} Element to render.
  */
@@ -57,7 +58,11 @@ export default function Edit( { attributes, setAttributes } ) {
 		button02Text,
 		buttonsFontSize,
 
-		textPadding
+		textPadding,
+
+		disableButtons,
+		showErrorMsgIfContentError,
+		contentDefaultKey
 		
 	} = attributes;
 
@@ -89,11 +94,18 @@ export default function Edit( { attributes, setAttributes } ) {
 		buttonsContainer: {
             backgroundColor: buttonsBackgroundColor,
 			padding: buttonsBackgroundPadding,
-			borderRadius: buttonsBackgroundRadius
+			borderRadius: buttonsBackgroundRadius,
+			//display: disableButtons ? 'none' : 'DO_NOT_DISPLAY'
 		},
 		text: {
             padding: textPadding
 		},
+	}
+	// divStyles.buttonsContainer.display
+	if (disableButtons) {
+		divStyles.buttonsContainer.display = 'none'
+	} else {
+		delete divStyles.buttonsContainer.display  // assigning 'block' or 'inline' ruins the view
 	}
 
 	return (
@@ -323,6 +335,27 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={(padding) => setAttributes({ textPadding: padding })}
                     />
                     </BaseControl>
+				</PanelBody>
+
+				<PanelBody title={ __( 'Advanced Settings', 'content-expandable-block' ) }>
+					<CheckboxControl
+						label="Disable Buttons"
+						help="if checked, you may want to set text-padding to 0px"
+						checked={ disableButtons }
+						onChange={(check) => {setAttributes({ disableButtons: check })}}
+					/>
+					<CheckboxControl
+						label="Show Error Message if Content Error"
+						help="if checked, when there is an error decoding the content, an error message is shown, otherwise the raw content is shown"
+						checked={ showErrorMsgIfContentError }
+						onChange={(check) => {setAttributes({ showErrorMsgIfContentError: check })}}
+					/>
+					<TextControl
+						label="Content Default Key"
+						value={ contentDefaultKey }
+						help="key (str) or idx (int) of the default content json key"
+						onChange={(text) => setAttributes({ contentDefaultKey: text })}
+					/>
 				</PanelBody>
 
 			</InspectorControls>

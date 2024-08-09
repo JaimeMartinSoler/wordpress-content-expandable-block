@@ -10,7 +10,7 @@ WP_PLUGIN_BLOCK_PATH="/mnt/c/xampp/htdocs/wordpress-jai/wp-content/plugins/conte
 
 echo "\nRunning export.sh: to export the block code as wordpress plugin"
 echo "  - sh export.sh      : will NOT run 'npm run build'"
-echo "  - sh export.sh build: will run 'npm run build'"
+echo "  - sh export.sh build: will     run 'npm run build'"
 echo "\nBLOCK_PATH:           $BLOCK_PATH"
 echo "WP_PLUGIN_BLOCK_PATH: $WP_PLUGIN_BLOCK_PATH"
 
@@ -32,4 +32,4 @@ cp -r $BLOCK_PATH/build $WP_PLUGIN_BLOCK_PATH
 echo "Copying $BLOCK_PATH/content-expandable-block.php to $WP_PLUGIN_BLOCK_PATH"
 cp $BLOCK_PATH/content-expandable-block.php $WP_PLUGIN_BLOCK_PATH
 
-echo "\nOK !!!\n"
+echo "\nDONE !!!\n"

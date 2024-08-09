@@ -9,9 +9,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const divNewsTextArray = document
             .querySelector(`.news-text-container[news-post-id="${postId}"]`)
             .querySelectorAll('.news-text');
+            
+        // newsIdxDefault (idx of the news-text with style display "block" instead of "none")
+        let newsIdxDefault = -1;
+        divNewsTextArray.forEach((div, i) => {
+            if (div.style.display === "block") {
+                newsIdxDefault = i;
+            }
+        });
 
         // update newsIdxDict 
-        newsIdxDict[postId] ||= 0  // if postId not in newsIdxDict, create it with value 0
+        newsIdxDict[postId] ||= newsIdxDefault  // if postId not in newsIdxDict, create it with value newsIdxDefault
         if (action === 'increase' && newsIdxDict[postId] < divNewsTextArray.length - 1) {
             newsIdxDict[postId]++;
         } else if (action === 'decrease' && newsIdxDict[postId] > 0) {

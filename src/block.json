@@ -76,11 +76,11 @@
         },
         "button01Text": {
             "type": "string",
-            "default": "⮝"
+            "default": "▲"
         },
         "button02Text": {
             "type": "string",
-            "default": "⮟"
+            "default": "▼"
         },
         "buttonsFontSize": {
             "type": "string",
@@ -90,6 +90,19 @@
         "textPadding": {
             "type": "string",
             "default": "10px"
+        },
+
+        "disableButtons": {
+            "type": "boolean",
+            "default": false
+        },
+        "showErrorMsgIfContentError": {
+            "type": "boolean",
+            "default": true
+        },
+        "contentDefaultKey": {
+            "type": "string",
+            "default": "0"
         }
 	},
 	"supports": {
