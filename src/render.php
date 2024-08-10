@@ -133,7 +133,7 @@ if (!function_exists('extract_p_0')) {
  *  $content_array = {"short": "news short", "medium": "news short", "large": "news large"}
  *  - $content_news_key = "short" => returns 0 (index of key "short")
  *  - $content_news_key = "large" => returns 2 (index of key "large")
- *  - $content_news_key = "x" => returns false (index not found, boolean)
+ *  - $content_news_key = "x" => returns 0 (default index for key not found)
  *  - $content_news_key = 1 => returns 1 (index 1)
  *  - $content_news_key = 3 => returns 2 (index is bounded to length - 1)
  *  - $content_news_key = -1 => returns 2 (negative index is allowed)
