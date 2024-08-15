@@ -39,15 +39,19 @@ document.addEventListener('DOMContentLoaded', function() {
             // get nbContainer
             const nbContainer = document.querySelector(`.news-button-container[news-post-id="${postId}"]`);
             // update buttons
+            // nb-01: idx 0
             if (newsIdxDict[postId] == 0) {
                 nbContainer.querySelector('.news-button.nb-01.nb-enabled').style.display = "none";
                 nbContainer.querySelector('.news-button.nb-01.nb-disabled').style.display = "block";
-            } else if (newsIdxDict[postId] == divNewsTextArray.length - 1) {
-                nbContainer.querySelector('.news-button.nb-02.nb-enabled').style.display = "none";
-                nbContainer.querySelector('.news-button.nb-02.nb-disabled').style.display = "block";
             } else {
                 nbContainer.querySelector('.news-button.nb-01.nb-enabled').style.display = "block";
                 nbContainer.querySelector('.news-button.nb-01.nb-disabled').style.display = "none";
+            }
+            // nb-02: idx last
+            if (newsIdxDict[postId] == divNewsTextArray.length - 1) {
+                nbContainer.querySelector('.news-button.nb-02.nb-enabled').style.display = "none";
+                nbContainer.querySelector('.news-button.nb-02.nb-disabled').style.display = "block";
+            } else {
                 nbContainer.querySelector('.news-button.nb-02.nb-enabled').style.display = "block";
                 nbContainer.querySelector('.news-button.nb-02.nb-disabled').style.display = "none";
             }
