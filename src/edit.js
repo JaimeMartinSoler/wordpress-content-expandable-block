@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { PanelBody, TextControl, __experimentalPaletteEdit as PaletteEdit, __experimentalBoxControl as BoxControl, FontSizePicker, BaseControl, CheckboxControl } from '@wordpress/components';
+import { PanelBody, TextControl, __experimentalPaletteEdit as PaletteEdit, __experimentalBoxControl as BoxControl, FontSizePicker, BaseControl, CheckboxControl, RadioControl } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 
 /**
@@ -35,6 +35,7 @@ import './editor.scss';
 export default function Edit( { attributes, setAttributes } ) {
 
 	const {
+		buttonsSide,
 		buttonsColor,
 		buttonsHoverColor,
 		buttonsDisabledColor,
@@ -54,8 +55,8 @@ export default function Edit( { attributes, setAttributes } ) {
 		buttonsTextColor,
 		buttonsTextHoverColor,
 		buttonsTextDisabledColor,
-		button01Text,
-		button02Text,
+		button01Text,  // typ: | ▲ | - | prev | less | 
+		button02Text,  // typ: | ▼ | + | next | more | 
 		buttonsFontSize,
 
 		textPadding,
@@ -113,6 +114,21 @@ export default function Edit( { attributes, setAttributes } ) {
 			<InspectorControls>
 
                 <PanelBody title={ __( 'Buttons Main', 'content-expandable-block' ) }>
+					<RadioControl
+						label="Buttons Side"
+						selected={ buttonsSide }
+						options={[
+							{
+								label: 'Left',
+								value: 'left'
+							},
+							{
+								label: 'Right',
+								value: 'right'
+							}
+						]}
+						onChange={ ( value ) => setAttributes( { buttonsSide: value } ) }
+					/>
 					<PaletteEdit
 						paletteLabel="Buttons Color | Hover | Disabled"
 						emptyMessage="Colors are empty"
@@ -362,15 +378,35 @@ export default function Edit( { attributes, setAttributes } ) {
 
 			<p { ...useBlockProps() }> {
 				<div class="content-expandable-block">
-					<div class="news-button-container" style={divStyles.buttonsContainer}>
-						<button class="news-button nb-01 nb-disabled" style={divStyles.buttonsDiasbled}>{button01Text}</button>
-						<button class="news-button nb-02 nb-enabled" style={divStyles.buttons}>{button02Text}</button>
-					</div>
-					<div class="news-text-container" style={divStyles.text}>
-						<div class="news-text">
-							This is a text sample for the content-expandable-block
-						</div>
-					</div>
+
+					{buttonsSide === 'left' && (
+						<>
+							<div class="news-button-container" style={divStyles.buttonsContainer}>
+								<button class="news-button nb-01 nb-disabled" style={divStyles.buttonsDiasbled}>{button01Text}</button>
+								<button class="news-button nb-02 nb-enabled" style={divStyles.buttons}>{button02Text}</button>
+							</div>
+							<div class="news-text-container" style={divStyles.text}>
+								<div class="news-text">
+									This is a text sample for the content-expandable-block
+								</div>
+							</div>
+						</>
+					)}
+
+					{buttonsSide === 'right' && (
+						<>
+							<div class="news-text-container" style={divStyles.text}>
+								<div class="news-text">
+									This is a text sample for the content-expandable-block
+								</div>
+							</div>
+							<div class="news-button-container" style={divStyles.buttonsContainer}>
+								<button class="news-button nb-01 nb-disabled" style={divStyles.buttonsDiasbled}>{button01Text}</button>
+								<button class="news-button nb-02 nb-enabled" style={divStyles.buttons}>{button02Text}</button>
+							</div>
+						</>
+					)}
+
 				</div>
 			} </p>
 		</>

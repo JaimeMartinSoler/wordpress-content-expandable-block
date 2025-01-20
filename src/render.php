@@ -70,6 +70,8 @@ if (!function_exists('build_content')) {
         $NEWS_TEXT = "";
         foreach (array_keys($content_json) as $idx => $content_news_key) {
             $content_news_value = $content_json[$content_news_key];
+            // replace string line breaks (\n) by HTML paragraphs (<p>)
+            $content_news_value = "<p>" . str_replace("\n", "<p/><p>", $content_news_value) . "<p/>";
             //print_r($content_news_value);
             $style = $idx == $content_news_key_index ? "display: block;" : "display: none;";
             $NEWS_TEXT = <<<NEWS_TEXT
@@ -83,19 +85,37 @@ if (!function_exists('build_content')) {
         $nb_02_increase_enabled_display = $content_news_key_index == count($content_json) - 1 ? "none" : "block";
         $nb_02_increase_disabled_display = $content_news_key_index == count($content_json) - 1 ? "block" : "none";
         $class_news_text_container = get_block_wrapper_attributes(['class' => 'news-text-container']);
-        $CONTENT_EXPANDABLE_BLOCK = <<<CONTENT_EXPANDABLE_BLOCK
-            <div class="content-expandable-block">
-                <div class="news-button-container" news-post-id=$post_id style="$styleButtonsContainer">
-                    <button class="news-button nb-01 nb-enabled" style="$styleButtons display: $nb_01_increase_enabled_display;">{$attributes['button01Text']}</button>
-                    <button class="news-button nb-01 nb-disabled" style="$styleButtonsDisabled display: $nb_01_increase_disabled_display;">{$attributes['button01Text']}</button>
-                    <button class="news-button nb-02 nb-enabled" style="$styleButtons display: $nb_02_increase_enabled_display;">{$attributes['button02Text']}</button>
-                    <button class="news-button nb-02 nb-disabled" style="$styleButtonsDisabled display: $nb_02_increase_disabled_display;">{$attributes['button02Text']}</button>
-                </div>
-                <div $class_news_text_container news-post-id=$post_id style="$styleText">
-                    $NEWS_TEXT
-                </div>
+        // DIV_BUTTONS
+        $DIV_BUTTONS = <<<DIV_BUTTONS
+            <div class="news-button-container" news-post-id=$post_id style="$styleButtonsContainer">
+                <button class="news-button nb-01 nb-enabled" style="$styleButtons display: $nb_01_increase_enabled_display;">{$attributes['button01Text']}</button>
+                <button class="news-button nb-01 nb-disabled" style="$styleButtonsDisabled display: $nb_01_increase_disabled_display;">{$attributes['button01Text']}</button>
+                <button class="news-button nb-02 nb-enabled" style="$styleButtons display: $nb_02_increase_enabled_display;">{$attributes['button02Text']}</button>
+                <button class="news-button nb-02 nb-disabled" style="$styleButtonsDisabled display: $nb_02_increase_disabled_display;">{$attributes['button02Text']}</button>
             </div>
-            CONTENT_EXPANDABLE_BLOCK;
+            DIV_BUTTONS
+        // DIV_TEXT
+        $DIV_TEXT = <<<DIV_TEXT
+            <div $class_news_text_container news-post-id=$post_id style="$styleText">
+                $NEWS_TEXT
+            </div>
+            DIV_TEXT
+        // CONTENT_EXPANDABLE_BLOCK
+        if ($attributes['buttonsSide'] === 'left') {
+            $CONTENT_EXPANDABLE_BLOCK = <<<CONTENT_EXPANDABLE_BLOCK
+                <div class="content-expandable-block">
+                    $DIV_BUTTONS
+                    $DIV_TEXT
+                </div>
+                CONTENT_EXPANDABLE_BLOCK;
+        } else if ($attributes['buttonsSide'] === 'right') {
+            $CONTENT_EXPANDABLE_BLOCK = <<<CONTENT_EXPANDABLE_BLOCK
+                <div class="content-expandable-block">
+                    $DIV_TEXT
+                    $DIV_BUTTONS
+                </div>
+                CONTENT_EXPANDABLE_BLOCK;
+        }
 
         return $CONTENT_EXPANDABLE_BLOCK;
     }

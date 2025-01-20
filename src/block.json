@@ -9,6 +9,10 @@
 	"example": {},
 	"attributes": {
 
+        "buttonsSide": {
+            "type": "string",
+            "default": "right"
+        },
         "buttonsColor": {
             "type": "string",
             "default": "#3c3c3c"
@@ -60,7 +64,6 @@
             "type": "string",
             "default": "4px"
         },
-
 
         "buttonsTextColor": {
             "type": "string",
