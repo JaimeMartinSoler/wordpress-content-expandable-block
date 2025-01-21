@@ -93,13 +93,13 @@ if (!function_exists('build_content')) {
                 <button class="news-button nb-02 nb-enabled" style="$styleButtons display: $nb_02_increase_enabled_display;">{$attributes['button02Text']}</button>
                 <button class="news-button nb-02 nb-disabled" style="$styleButtonsDisabled display: $nb_02_increase_disabled_display;">{$attributes['button02Text']}</button>
             </div>
-            DIV_BUTTONS
+            DIV_BUTTONS;
         // DIV_TEXT
         $DIV_TEXT = <<<DIV_TEXT
             <div $class_news_text_container news-post-id=$post_id style="$styleText">
                 $NEWS_TEXT
             </div>
-            DIV_TEXT
+            DIV_TEXT;
         // CONTENT_EXPANDABLE_BLOCK
         if ($attributes['buttonsSide'] === 'left') {
             $CONTENT_EXPANDABLE_BLOCK = <<<CONTENT_EXPANDABLE_BLOCK
