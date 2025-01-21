@@ -102,6 +102,7 @@ export default function Edit( { attributes, setAttributes } ) {
             padding: textPadding
 		},
 	}
+	const textSample = "This is a text sample for the content-expandable-block. This is supposed to be filled with the corresponding content of our WordPress posts. With this text we can have an idea of the looks of this content-expandable-block."
 	// divStyles.buttonsContainer.display
 	if (disableButtons) {
 		divStyles.buttonsContainer.display = 'none'
@@ -387,7 +388,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							</div>
 							<div class="news-text-container" style={divStyles.text}>
 								<div class="news-text">
-									This is a text sample for the content-expandable-block
+									{textSample}
 								</div>
 							</div>
 						</>
@@ -397,7 +398,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						<>
 							<div class="news-text-container" style={divStyles.text}>
 								<div class="news-text">
-									This is a text sample for the content-expandable-block
+									{textSample}
 								</div>
 							</div>
 							<div class="news-button-container" style={divStyles.buttonsContainer}>
