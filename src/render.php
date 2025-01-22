@@ -71,7 +71,7 @@ if (!function_exists('build_content')) {
         foreach (array_keys($content_json) as $idx => $content_news_key) {
             $content_news_value = $content_json[$content_news_key];
             // replace string line breaks (\n) by HTML paragraphs (<p>)
-            $content_news_value = "<p>" . str_replace("\n", "<p/><p>", $content_news_value) . "<p/>";
+            $content_news_value = "<p style=\"margin-top: 0;\">" . str_replace("\n", "<p/><p>", $content_news_value) . "<p/>";
             //print_r($content_news_value);
             $style = $idx == $content_news_key_index ? "display: block;" : "display: none;";
             $NEWS_TEXT = <<<NEWS_TEXT
